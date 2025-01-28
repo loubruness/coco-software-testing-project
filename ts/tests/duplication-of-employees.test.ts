@@ -1,4 +1,5 @@
-import { test, expect } from "@playwright/test";
+import { test } from "./fixtures";
+import { expect } from "@playwright/test";
 
 test("test", async ({ page }) => {
   await page.goto("https://c.se1.hr.dmerej.info/add_employee");

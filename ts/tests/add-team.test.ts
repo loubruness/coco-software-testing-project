@@ -1,14 +1,10 @@
-import { test, expect, chromium } from "@playwright/test";
+import { test } from "./fixtures";
+import { expect, chromium } from "@playwright/test";
 
 test("has title", async () => {
   // TODO: remove 'slowMo' when done debugging
-  const browser = await chromium.launch({ slowMo: 1000 });
+  const browser = await chromium.launch();
   const page = await browser.newPage();
-
-  // Reset database
-  await page.goto("/reset_db");
-  const proceedButton = page.locator("button:has-text('proceed')");
-  await proceedButton.click();
 
   // Create a new team
   await page.goto("/add_team");
