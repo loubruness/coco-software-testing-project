@@ -1,6 +1,6 @@
 import { expect, type Locator, type Page } from '@playwright/test';
 
-export class PlaywrightResetDbPage {
+export class ResetDbPage {
   readonly page: Page;
   readonly resetDbButton: Locator;
 
