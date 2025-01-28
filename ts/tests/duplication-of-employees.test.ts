@@ -37,6 +37,5 @@ test("test", async ({ page }) => {
   await page.getByRole("cell", { name: "test@test.com" }).nth(1).click();
 
   const locator = page.getByText("test@test.com");
-  console.log(locator);
   await expect(locator).toHaveCount(1);
 });
