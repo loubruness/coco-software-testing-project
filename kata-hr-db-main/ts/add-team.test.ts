@@ -1,13 +1,25 @@
-import { open, Database } from 'sqlite'
-import sqlite3 from 'sqlite3'
-import { afterAll, beforeAll, expect, test } from '@jest/globals'
+import { Database, open } from 'sqlite'
+import { afterAll, beforeAll, beforeEach, expect, test } from '@jest/globals'
+
 import axios from 'axios'
+import sqlite3 from 'sqlite3'
 
 const DATABASE_PATH = '../backend/db.sqlite3'
 let db: Database
 
 beforeAll(async () => {
   db = await open({filename: DATABASE_PATH, driver : sqlite3.Database })
+})
+
+beforeEach(async () => {
+  // Clear the database before each test
+  await db.exec(`
+    DELETE FROM hr_team;
+    DELETE FROM hr_employee;
+    DELETE FROM hr_address;
+    DELETE FROM hr_basicinfo;
+    DELETE FROM hr_contract;
+  `)
 })
 
 afterAll(async () => {
