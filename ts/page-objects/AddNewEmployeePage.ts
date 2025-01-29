@@ -1,4 +1,5 @@
 import { Locator, Page } from "@playwright/test";
+import User from "../User";
 
 export class AddNewEmployeePage {
   readonly page: Page;
@@ -27,6 +28,17 @@ export class AddNewEmployeePage {
 
   async goto() {
     await this.page.goto("/");
+  }
+
+  async fillForm(user: User) {
+    await this.fillName(user.name);
+    await this.fillEmail(user.email);
+    await this.fillAddressLine1(user.address.line1);
+    await this.fillAddressLine2(user.address.line2);
+    await this.fillCity(user.city);
+    await this.fillZipCode(user.zipCode.toString());
+    await this.fillHiringDate(user.hiringDate);
+    await this.fillJobTitle(user.jobTitle);
   }
 
   async fillName(value: string) {

@@ -1,36 +1,34 @@
 import { test } from "./fixtures";
 import { expect } from "@playwright/test";
 import { AddNewEmployeePage } from "../page-objects/AddNewEmployeePage";
+import { EmployeesPage } from "../page-objects/EmployeesPage";
+import User from "../User";
 
 test("Can add a duplicate employee", async ({ page }) => {
   // Setup
   const addEmployeePage = new AddNewEmployeePage(page);
 
+  const user = new User(
+    "test",
+    "test@test.com",
+    { line1: "address", line2: "" },
+    "city",
+    1234,
+    "2025-01-28",
+    "job title"
+  );
+
   // Add first employee
   addEmployeePage.goto();
-
-  addEmployeePage.fillName("test");
-  addEmployeePage.fillEmail("test@test.com");
-  addEmployeePage.fillAddressLine1("address");
-  addEmployeePage.fillCity("city");
-  addEmployeePage.fillZipCode("1234");
-  addEmployeePage.fillHiringDate("2025-01-28");
-  addEmployeePage.fillJobTitle("job");
+  addEmployeePage.fillForm(user);
   addEmployeePage.addEmployee();
 
   // Add second employee
   addEmployeePage.goto();
-
-  addEmployeePage.fillName("test");
-  addEmployeePage.fillEmail("test@test.com");
-  addEmployeePage.fillAddressLine1("address");
-  addEmployeePage.fillCity("city");
-  addEmployeePage.fillZipCode("1234");
-  addEmployeePage.fillHiringDate("2025-01-28");
-  addEmployeePage.fillJobTitle("job");
+  addEmployeePage.fillForm(user);
   addEmployeePage.addEmployee();
 
   // Assert
-  const locator = page.getByText("test@test.com");
-  await expect(locator).toHaveCount(1);
+  const employeesPage = new EmployeesPage(page);
+  await expect(employeesPage.getListOfEmployees.length).toBe(1);
 });
