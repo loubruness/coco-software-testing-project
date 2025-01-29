@@ -8,7 +8,7 @@ test("create employee with zip negative", async ({ page }) => {
   await expect(locator).toHaveAttribute('aria-invalid', 'true');
 });
 
-test("create employee with zip to long", async ({ page }) => {
+test("create employee with zip too long", async ({ page }) => {
   await page.goto('https://c.se1.hr.dmerej.info/add_employee');
   await page.getByPlaceholder('Zip code').fill('10000000');
   const locator = page.getByPlaceholder('Zip code');

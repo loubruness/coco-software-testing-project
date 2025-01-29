@@ -2,7 +2,7 @@ import { chromium, expect } from "@playwright/test";
 
 import { test } from "./fixtures";
 
-test("Can't promote as manager a manager", async () => {
+test("Can promote as manager a manager", async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
 

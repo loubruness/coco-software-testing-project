@@ -1,7 +1,7 @@
 import { test } from "./fixtures";
 import { expect } from "@playwright/test";
 
-test("test", async ({ page }) => {
+test("Can add a duplicate employee", async ({ page }) => {
   await page.goto("https://c.se1.hr.dmerej.info/add_employee");
   await page.getByPlaceholder("Name").click();
   await page.getByPlaceholder("Name").fill("test");
